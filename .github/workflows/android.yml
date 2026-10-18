@@ -21,6 +21,8 @@ jobs:
           ls "$ANDROID_HOME/platforms" | tail -5
       - name: Instalar dependencias
         run: npm install --no-audit --no-fund
+      - name: Completar audios faltantes sin sobrescribir originales
+        run: python3 scripts/generate_fallback_audio.py
       - name: Generar proyecto Android
         run: |
           npx cap add android
