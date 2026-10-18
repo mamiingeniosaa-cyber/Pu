@@ -31,6 +31,14 @@ jobs:
         run: |
           sed -i 's/minSdkVersion = 23/minSdkVersion = 24/' android/variables.gradle
           grep -E 'minSdkVersion[[:space:]]*=[[:space:]]*24' android/variables.gradle
+      - name: Actualizar SDK objetivo a Android 16 (API 36)
+        run: |
+          yes | sdkmanager "platforms;android-36" "build-tools;36.0.0" || true
+          sed -i 's/compileSdkVersion = 35/compileSdkVersion = 36/' android/variables.gradle
+          sed -i 's/targetSdkVersion = 35/targetSdkVersion = 36/' android/variables.gradle
+          grep -E '(compileSdkVersion|targetSdkVersion)[[:space:]]*=[[:space:]]*36' android/variables.gradle
+          sed -i 's/versionCode 1/versionCode 2/' android/app/build.gradle
+          grep 'versionCode 2' android/app/build.gradle
       - name: Compilar AAB release
         run: cd android && chmod +x gradlew && ./gradlew bundleRelease
       - name: Firmar AAB cuando hay secretos de firma
