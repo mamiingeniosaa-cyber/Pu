@@ -1,0 +1,6 @@
+{
+  "appId": "com.pufff.app",
+  "appName": "PUFFF",
+  "webDir": "www",
+  "server": { "androidScheme": "https" }
+}
