@@ -15,7 +15,10 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - uses: android-actions/setup-android@v3
+      - name: Verificar Android SDK
+        run: |
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          ls "$ANDROID_HOME/platforms" | tail -5
       - name: Instalar dependencias
         run: npm install --no-audit --no-fund
       - name: Generar proyecto Android
